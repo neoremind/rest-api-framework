@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource-bundle name="ResultCode">
+    <message id="PARAM_INVALID">
+        <data>Param is invalid, {0}</data>
+        <code>10001</code>
+    </message>
+    <message id="ORDER_NOT_FOUND">
+        <data>Order not found</data>
+        <code>10002</code>
+    </message>
+    <message id="INVENTORY_NOT_ENOUGH">
+        <data>Inventory not enough</data>
+        <code>10003</code>
+    </message>
+</resource-bundle>

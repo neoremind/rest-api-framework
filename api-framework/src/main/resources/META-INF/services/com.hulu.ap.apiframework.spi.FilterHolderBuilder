@@ -1,0 +1,3 @@
+com.hulu.ap.apiframework.server.filter.RecordRequestServletFilterHolder
+com.hulu.ap.apiframework.server.filter.CrossOriginFilterHolder
+com.hulu.ap.apiframework.server.filter.GuiceFilterHolder

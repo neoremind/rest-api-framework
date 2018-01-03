@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_111" class="java.beans.XMLDecoder">
+    <object class="java.util.ArrayList">
+        <void method="add">
+            <object class="com.hulu.ap.example.production.vo.Order">
+                <void property="createdBy">
+                    <string>Jason</string>
+                </void>
+                <void property="orderId">
+                    <int>100</int>
+                </void>
+                <void property="orderPlacedDate">
+                    <object class="java.util.Date">
+                        <long>1476201600000</long>
+                    </object>
+                </void>
+                <void property="productIdList">
+                    <object class="java.util.ArrayList">
+                        <void method="add">
+                            <long>1</long>
+                        </void>
+                        <void method="add">
+                            <long>2</long>
+                        </void>
+                        <void method="add">
+                            <long>4</long>
+                        </void>
+                        <void method="add">
+                            <long>6</long>
+                        </void>
+                    </object>
+                </void>
+            </object>
+        </void>
+        <void method="add">
+            <object class="com.hulu.ap.example.production.vo.Order">
+                <void property="createdBy">
+                    <string>Tom</string>
+                </void>
+                <void property="orderId">
+                    <int>101</int>
+                </void>
+                <void property="orderPlacedDate">
+                    <object class="java.util.Date">
+                        <long>1478793600000</long>
+                    </object>
+                </void>
+                <void property="productIdList">
+                    <object class="java.util.ArrayList">
+                        <void method="add">
+                            <long>3</long>
+                        </void>
+                        <void method="add">
+                            <long>7</long>
+                        </void>
+                    </object>
+                </void>
+            </object>
+        </void>
+        <void method="add">
+            <object class="com.hulu.ap.example.production.vo.Order">
+                <void property="createdBy">
+                    <string>Brown</string>
+                </void>
+                <void property="orderId">
+                    <int>102</int>
+                </void>
+                <void property="orderPlacedDate">
+                    <object class="java.util.Date">
+                        <long>1481731200000</long>
+                    </object>
+                </void>
+                <void property="productIdList">
+                    <object class="java.util.ArrayList">
+                        <void method="add">
+                            <long>8</long>
+                        </void>
+                    </object>
+                </void>
+            </object>
+        </void>
+    </object>
+</java>

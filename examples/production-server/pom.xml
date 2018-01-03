@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hulu.ap</groupId>
+    <artifactId>production-server</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>production-server</name>
+
+    <properties>
+        <java.source>1.8</java.source>
+        <java.target>1.8</java.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+        <!-- api service default url base path for swagger codegen of client stub -->
+        <service.staging.url>localhost:8080</service.staging.url>
+        <service.prod.url>localhost:8080</service.prod.url>
+        <service.test.url>localhost:8080</service.test.url>
+
+        <!-- settings needed for swagger codegen of client stub -->
+        <swagger.ui.title>example-production-server</swagger.ui.title>
+        <swagger.ui.version>1.0</swagger.ui.version>
+        <swagger.ui.description>My production service</swagger.ui.description>
+        <swagger.ui.contact.email>xu.zhang@hulu.com</swagger.ui.contact.email>
+        <swagger.ui.contact.name>Xu Zhang</swagger.ui.contact.name>
+        <swagger.client.module.package>
+            com.hulu.ap.example.production.server.client
+        </swagger.client.module.package>
+
+        <!-- deps for generating for swagger codegen of client stub  -->
+        <swagger-core-version>1.5.9</swagger-core-version>
+        <okhttp-version>2.7.5</okhttp-version>
+        <gson-version>2.6.2</gson-version>
+        <jodatime-version>2.9.3</jodatime-version>
+
+        <!-- server launching main class  -->
+        <main.class.name>com.hulu.ap.apiframework.JettyServer</main.class.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hulu.ap</groupId>
+            <artifactId>api-framework</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hulu.ap</groupId>
+            <artifactId>api-guice-plugin</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hulu.ap</groupId>
+            <artifactId>api-commons</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baidu.unbiz</groupId>
+            <artifactId>fluent-validator</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baidu.unbiz</groupId>
+            <artifactId>fluent-validator-jsr303</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baidu.unbiz</groupId>
+            <artifactId>easy-mapper</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.neoremind</groupId>
+            <artifactId>result-util</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- deps for generating client stub -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-core-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+        <finalName>${project.artifactId}</finalName>
+        <outputDirectory>target/classes</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.source}</source>
+                    <target>${java.target}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class.name}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <inherited>true</inherited>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>com.hulu</locations>
+                            <schemes>http</schemes>
+                            <host>${service.staging.url}</host>
+                            <!--<basePath>/api</basePath>-->
+                            <info>
+                                <title>${swagger.ui.title}</title>
+                                <version>${swagger.ui.version}</version>
+                                <description>${swagger.ui.description}
+                                </description>
+                                <contact>
+                                    <email>${swagger.ui.contact.email}</email>
+                                    <name>${swagger.ui.contact.name}</name>
+                                </contact>
+                            </info>
+                            <swaggerDirectory>
+                                ${project.build.directory}/generated
+                            </swaggerDirectory>
+                            <swaggerApiReader>
+                                io.swagger.jaxrs.reader.DefaultJaxrsApiReader
+                            </swaggerApiReader>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <inputSpec>
+                                ${project.build.directory}/generated/swagger.json
+                            </inputSpec>
+                            <language>java</language>
+                            <modelPackage>${swagger.client.module.package}
+                            </modelPackage>
+                            <apiPackage>${swagger.client.module.package}
+                            </apiPackage>
+                            <invokerPackage>${swagger.client.module.package}
+                            </invokerPackage>
+                            <!--<modelNamePrefix>ap-metaservice</modelNamePrefix>-->
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.name}-client</artifactId>
+                            <artifactVersion>${project.version}
+                            </artifactVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${main.class.name}</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>mvn</executable>
+                    <commandlineArgs>package</commandlineArgs>
+                    <workingDirectory>
+                        ${project.build.directory}/generated-sources/swagger
+                    </workingDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install simple-server-client</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>
+                                ${project.build.directory}/generated-sources/swagger/target/${project.name}-client-1.0.0-SNAPSHOT.jar
+                            </file>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.name}-client</artifactId>
+                            <version>${project.version}</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-deploy-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>deploy server</id>-->
+                        <!--<phase>deploy</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>deploy-file</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--&lt;!&ndash;===============================================================================&ndash;&gt;-->
+                            <!--&lt;!&ndash; WARN: Switch the config when dealing with maven's main repo and snapshot rep  &ndash;&gt;-->
+                            <!--&lt;!&ndash;===============================================================================&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;<repositoryId>Hulu_Release</repositoryId>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<url>&ndash;&gt;-->
+                            <!--&lt;!&ndash;http://nexus.prod.hulu.com/service/local/repositories/releases/&ndash;&gt;-->
+                            <!--&lt;!&ndash;</url>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<file>&ndash;&gt;-->
+                            <!--&lt;!&ndash;${project.build.directory}/generated-sources/swagger/target/${project.name}-client-${project.version}.jar&ndash;&gt;-->
+                            <!--&lt;!&ndash;</file>&ndash;&gt;-->
+
+                            <!--<repositoryId>Hulu_Local_Snapshots</repositoryId>-->
+                            <!--<url>-->
+                                <!--http://nexus.prod.hulu.com/service/local/repositories/snapshots/-->
+                            <!--</url>-->
+                            <!--<file>-->
+                                <!--${project.build.directory}/generated-sources/swagger/target/${project.name}-client-${project.version}.jar-->
+                            <!--</file>-->
+
+                            <!--<groupId>${project.groupId}</groupId>-->
+                            <!--<artifactId>${project.artifactId}-client-->
+                            <!--</artifactId>-->
+                            <!--<version>${project.version}</version>-->
+                            <!--<packaging>jar</packaging>-->
+                            <!--<retryFailedDeploymentCount>2-->
+                            <!--</retryFailedDeploymentCount>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+
+    <!-- Specify from where we pull artifacts -->
+    <repositories>
+        <repository>
+            <id>hulu-nexus</id>
+            <name>Hulu Nexus</name>
+            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>hulu-releases</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>hulu-snapshots</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>Maven2</id>
+            <url>http://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>hulu-nexus</id>
+            <name>Hulu Nexus</name>
+            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>hulu-releases</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>hulu-snapshots</id>
+            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
