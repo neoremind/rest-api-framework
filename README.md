@@ -4,7 +4,7 @@ An API framework for building RESTFul Web Services.
 [![Build Status](https://travis-ci.org/neoremind/rest-api-framework.svg?branch=master)](https://travis-ci.org/neoremind/rest-api-framework)
 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
-*Note, Project has not been published to Maven Central yet, you can checkout the project and compile & install freely*
+**Note that project has not been published to Maven Central yet, you can checkout the project and compile & install freely**
 
 ### Overview
 
