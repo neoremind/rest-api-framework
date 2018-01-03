@@ -10,8 +10,8 @@ An API framework for building RESTFul Web Services.
 - supports [JSR 330](https://github.com/google/guice/wiki/JSR330) and user can make [Google Guice](https://github.com/google/guice) as IoC container for better bean management
 - leverage [Jetty HTTP Server](http://www.eclipse.org/jetty/) and [OKHttp](http://square.github.io/okhttp/) as p2p network communication framework
 - develop server once, got many popular language clients by using [Swagger Codegen](http://swagger.io/swagger-codegen/)
-- Automattically full life cycle continuous deployment via [Maven](http://maven.apache.org/) build and [Jenkins](https://jenkins.io/)
-- Can integrate with [Grafana](https://grafana.com/) for metric collection
+- automatically full life cycle continuous deployment via [Maven](http://maven.apache.org/) build and [Jenkins](https://jenkins.io/)
+- can integrate with [Grafana](https://grafana.com/) for metric collection
 
 ### Architecture
 
@@ -175,8 +175,6 @@ You can visit the index page on `http://host:port` .
 there will be two links, one will show the [swagger.json](http://swagger.io/specification/) while the other redirect you to [swagger-ui](http://swagger.io/swagger-ui/) portal to make quick api calls.
 
 ![](docs/images/swagger_json.png)
-
-
 
 ![](docs/images/swagger_ui.png)
 
