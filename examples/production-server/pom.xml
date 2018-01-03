@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hulu.ap</groupId>
+    <groupId>com.neoremind</groupId>
     <artifactId>production-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -24,10 +24,10 @@
         <swagger.ui.title>example-production-server</swagger.ui.title>
         <swagger.ui.version>1.0</swagger.ui.version>
         <swagger.ui.description>My production service</swagger.ui.description>
-        <swagger.ui.contact.email>xu.zhang@hulu.com</swagger.ui.contact.email>
+        <swagger.ui.contact.email>xuzh1002@gmail.com</swagger.ui.contact.email>
         <swagger.ui.contact.name>Xu Zhang</swagger.ui.contact.name>
         <swagger.client.module.package>
-            com.hulu.ap.example.production.server.client
+            com.neoremind.example.production.server.client
         </swagger.client.module.package>
 
         <!-- deps for generating for swagger codegen of client stub  -->
@@ -37,26 +37,26 @@
         <jodatime-version>2.9.3</jodatime-version>
 
         <!-- server launching main class  -->
-        <main.class.name>com.hulu.ap.apiframework.JettyServer</main.class.name>
+        <main.class.name>com.neoremind.apiframework.JettyServer</main.class.name>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.hulu.ap</groupId>
-            <artifactId>api-framework</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <groupId>com.neoremind</groupId>
+            <artifactId>rest-api-framework</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.hulu.ap</groupId>
-            <artifactId>api-guice-plugin</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <groupId>com.neoremind</groupId>
+            <artifactId>rest-api-guice-plugin</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.hulu.ap</groupId>
-            <artifactId>api-commons</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <groupId>com.neoremind</groupId>
+            <artifactId>rest-api-commons</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -81,6 +81,12 @@
             <groupId>net.neoremind</groupId>
             <artifactId>result-util</artifactId>
             <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.ibm.icu</groupId>
+                    <artifactId>icu4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- deps for generating client stub -->
@@ -108,6 +114,32 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>${jodatime-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -164,7 +196,7 @@
                     <apiSources>
                         <apiSource>
                             <springmvc>false</springmvc>
-                            <locations>com.hulu</locations>
+                            <locations>com.neoremind</locations>
                             <schemes>http</schemes>
                             <host>${service.staging.url}</host>
                             <!--<basePath>/api</basePath>-->
@@ -305,97 +337,7 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-deploy-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>deploy server</id>-->
-                        <!--<phase>deploy</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>deploy-file</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--&lt;!&ndash;===============================================================================&ndash;&gt;-->
-                            <!--&lt;!&ndash; WARN: Switch the config when dealing with maven's main repo and snapshot rep  &ndash;&gt;-->
-                            <!--&lt;!&ndash;===============================================================================&ndash;&gt;-->
-
-                            <!--&lt;!&ndash;<repositoryId>Hulu_Release</repositoryId>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<url>&ndash;&gt;-->
-                            <!--&lt;!&ndash;http://nexus.prod.hulu.com/service/local/repositories/releases/&ndash;&gt;-->
-                            <!--&lt;!&ndash;</url>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<file>&ndash;&gt;-->
-                            <!--&lt;!&ndash;${project.build.directory}/generated-sources/swagger/target/${project.name}-client-${project.version}.jar&ndash;&gt;-->
-                            <!--&lt;!&ndash;</file>&ndash;&gt;-->
-
-                            <!--<repositoryId>Hulu_Local_Snapshots</repositoryId>-->
-                            <!--<url>-->
-                                <!--http://nexus.prod.hulu.com/service/local/repositories/snapshots/-->
-                            <!--</url>-->
-                            <!--<file>-->
-                                <!--${project.build.directory}/generated-sources/swagger/target/${project.name}-client-${project.version}.jar-->
-                            <!--</file>-->
-
-                            <!--<groupId>${project.groupId}</groupId>-->
-                            <!--<artifactId>${project.artifactId}-client-->
-                            <!--</artifactId>-->
-                            <!--<version>${project.version}</version>-->
-                            <!--<packaging>jar</packaging>-->
-                            <!--<retryFailedDeploymentCount>2-->
-                            <!--</retryFailedDeploymentCount>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
-    <!-- Specify from where we pull artifacts -->
-    <repositories>
-        <repository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </repository>
-        <repository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </repository>
-        <repository>
-            <id>Maven2</id>
-            <url>http://repo.maven.apache.org/maven2/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

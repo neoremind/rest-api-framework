@@ -9,8 +9,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.hulu.doppler" level="ERROR"/>
-    <logger name="com.hulu.commons.statsd" level="ERROR"/>
+    <logger name="com.neoremind" level="ERROR"/>
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>

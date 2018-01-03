@@ -76,28 +76,6 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
-        <!--&lt;!&ndash; internal dependencies &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.hulu.commons</groupId>-->
-            <!--<artifactId>hulu-java-commons-statsd</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.hulu.doppler</groupId>-->
-            <!--<artifactId>doppler-logback</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.hulu.commons</groupId>-->
-            <!--<artifactId>hulu-java-commons-jvmmonitor</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.hulu.commons</groupId>-->
-            <!--<artifactId>hulu-java-commons-utils</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.hulu.commons</groupId>-->
-            <!--<artifactId>hulu-java-commons-configuration</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.google.inject.extensions</groupId>
             <artifactId>guice-servlet</artifactId>
@@ -111,6 +89,11 @@
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
         </dependency>
 
         <!-- test dependencies -->
@@ -132,12 +115,6 @@
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,0 +1,3 @@
+com.neoremind.apiframework.server.filter.RecordRequestServletFilterHolder
+com.neoremind.apiframework.server.filter.CrossOriginFilterHolder
+com.neoremind.apiframework.server.filter.GuiceFilterHolder

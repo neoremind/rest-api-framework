@@ -17,10 +17,10 @@
         <module>api-guice-plugin</module>
         <module>api-commons</module>
         <module>api-client-helper</module>
-        <!--<module>examples/simple-server</module>-->
-        <!--<module>examples/simple-client</module>-->
-        <!--<module>examples/production-server</module>-->
-        <!--<module>examples/production-client</module>-->
+        <module>examples/simple-server</module>
+        <module>examples/simple-client</module>
+        <module>examples/production-server</module>
+        <module>examples/production-client</module>
     </modules>
 
     <properties>
@@ -33,9 +33,8 @@
 
         <!-- dependency properties -->
         <jersey.version>2.15</jersey.version>
-        <jetty.version>9.3.8.v20160314</jetty.version>
+        <jetty.version>9.3.1.v20150714</jetty.version>
         <commons.lang.version>3.3.2</commons.lang.version>
-        <hulu.java.commons.version>1.7.47</hulu.java.commons.version>
         <commons.collections.version>4.0</commons.collections.version>
         <guice.servlet.version>4.0</guice.servlet.version>
         <jersey2.guice.version>0.10</jersey2.guice.version>
@@ -210,32 +209,11 @@
                 <version>1.1.3</version>
             </dependency>
 
-            <!--&lt;!&ndash; hulu internal dependencies &ndash;&gt;-->
-            <!--<dependency>-->
-                <!--<groupId>com.hulu.commons</groupId>-->
-                <!--<artifactId>hulu-java-commons-statsd</artifactId>-->
-                <!--<version>${hulu.java.commons.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.hulu.doppler</groupId>-->
-                <!--<artifactId>doppler-logback</artifactId>-->
-                <!--<version>2.0.5-SNAPSHOT</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.hulu.commons</groupId>-->
-                <!--<artifactId>hulu-java-commons-jvmmonitor</artifactId>-->
-                <!--<version>${hulu.java.commons.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.hulu.commons</groupId>-->
-                <!--<artifactId>hulu-java-commons-utils</artifactId>-->
-                <!--<version>${hulu.java.commons.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.hulu.commons</groupId>-->
-                <!--<artifactId>hulu-java-commons-configuration</artifactId>-->
-                <!--<version>${hulu.java.commons.version}</version>-->
-            <!--</dependency>-->
+            <dependency>
+                <groupId>com.ibm.icu</groupId>
+                <artifactId>icu4j</artifactId>
+                <version>3.4.4</version>
+            </dependency>
 
             <!-- test dependencies -->
             <dependency>
@@ -268,18 +246,6 @@
                 <version>1.3</version>
                 <scope>test</scope>
             </dependency>
-            <!--<dependency>-->
-            <!--<groupId>org.jmock</groupId>-->
-            <!--<artifactId>jmock-junit4</artifactId>-->
-            <!--<version>2.5.1</version>-->
-            <!--<scope>test</scope>-->
-            <!--<exclusions>-->
-            <!--<exclusion>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit-dep</artifactId>-->
-            <!--</exclusion>-->
-            <!--</exclusions>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
@@ -331,52 +297,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </repository>
-    </distributionManagement>
-
-    <!-- Specify from where we pull artifacts -->
-    <repositories>
-        <repository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </repository>
-        <repository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </repository>
-        <repository>
-            <id>Maven2</id>
-            <url>http://repo.maven.apache.org/maven2/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

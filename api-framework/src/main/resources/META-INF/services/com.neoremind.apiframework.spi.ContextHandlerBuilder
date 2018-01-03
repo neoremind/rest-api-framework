@@ -1,0 +1,2 @@
+com.neoremind.apiframework.server.contexthandler.ResourceContextHandler
+com.neoremind.apiframework.server.contexthandler.SwaggerContextHandler

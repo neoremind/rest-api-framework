@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hulu.ap</groupId>
+    <groupId>com.neoremind</groupId>
     <artifactId>production-client</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -25,15 +25,15 @@
     <dependencies>
         <!-- client stub -->
         <dependency>
-            <groupId>com.hulu.ap</groupId>
+            <groupId>com.neoremind</groupId>
             <artifactId>production-server-client</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.hulu.ap</groupId>
-            <artifactId>api-client-helper</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <groupId>com.neoremind</groupId>
+            <artifactId>rest-api-client-helper</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -135,41 +135,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <!-- Specify from where we pull artifacts -->
-    <repositories>
-        <repository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </repository>
-        <repository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </repository>
-        <repository>
-            <id>Maven2</id>
-            <url>http://repo.maven.apache.org/maven2/</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>hulu-nexus</id>
-            <name>Hulu Nexus</name>
-            <url>http://nexus.prod.hulu.com/content/groups/public/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-releases</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/releases</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>hulu-snapshots</id>
-            <url>http://nexus.prod.hulu.com/content/repositories/snapshots</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
