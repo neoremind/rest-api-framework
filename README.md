@@ -63,11 +63,7 @@ rest-api-framework can be fully integrated with your CD infstructure to facilita
 - [3. Server arguments](#3-server-arguments)
 
 - [Miscellaneous Notes](#miscellaneous-notes)
-  - [Development](#development)
-  - [Performance test](#performance-test)
-  - [Dependencies](#dependencies)
   - [Different from other RPC frameworks](#different-from-other-rpc-frameworks)
-  - [Supports Java 8 and Later](#supports-java-8-and-later)
 
 
 ## 1. Using the Library

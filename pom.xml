@@ -17,10 +17,10 @@
         <module>api-guice-plugin</module>
         <module>api-commons</module>
         <module>api-client-helper</module>
-        <module>examples/simple-server</module>
-        <module>examples/simple-client</module>
-        <module>examples/production-server</module>
-        <module>examples/production-client</module>
+        <!--<module>examples/simple-server</module>-->
+        <!--<module>examples/simple-client</module>-->
+        <!--<module>examples/production-server</module>-->
+        <!--<module>examples/production-client</module>-->
     </modules>
 
     <properties>
