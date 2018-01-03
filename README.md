@@ -1,6 +1,11 @@
 # rest-api-framework
 An API framework for building RESTFul Web Services. 
 
+[![Build Status](https://travis-ci.org/neoremind/rest-api-framework.svg?branch=master)](https://travis-ci.org/neoremind/rest-api-framework)
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+*Note, Project has not been published to Maven Central yet, you can checkout the project and compile & install freely*
+
 ### Overview
 
 - implemented in Java, with available Java version of 8 for server side and 7+ for client side
@@ -184,7 +189,7 @@ there will be two links, one will show the [swagger.json](http://swagger.io/spec
 
 You MUST add the client stub dependency through maven or gradle first. 
 
-The client stub jar can be auto-generated and published to Maven repository, for more information about how it works, please go to [Countinous Deployment](). 
+The client stub jar can be auto-generated and published to Maven repository.
 
 The naming convention of the jar is always `${your-server-artifactId}-client`, for example.
 
@@ -522,7 +527,7 @@ So you can better organize your project struture like below:
 
 #### 1.5.5 Logging
 
-You can visit `donki->logs` pages to see realtime logs and download history logs. 
+Console will show real-time access logs. 
 
 
 #### 1.5.6 Exception handling
